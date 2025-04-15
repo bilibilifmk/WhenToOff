@@ -1,0 +1,95 @@
+{
+  "name": "whentooff",
+  "displayName": "WhenToOff",
+  "description": "WhenToOff 是一款 VS Code 插件，旨在根据用户设置的工作时间、日均薪资和工作日等参数，实时在 VS Code 状态栏显示工作时间进度及对应的折合日薪。插件支持用户自定义状态栏显示模板，允许灵活调整显示内容和格式",
+  "version": "0.0.1",
+  "publisher": "bilibilifmk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bilibilifmk/WhenToOff"
+  },
+  "icon": "images/logo.png",
+  "engines": {
+    "vscode": "^1.99.0"
+  },
+  "categories": [
+    "Other"
+  ],
+ "activationEvents": [
+  "onStartupFinished"
+],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "WhenToOff 设置",
+      "properties": {
+        "whentooff.dailyWage": {
+          "type": "number",
+          "default": 200,
+          "description": "日均薪资"
+        },
+        "whentooff.startTime": {
+          "type": "string",
+          "default": "09:00",
+          "description": "上班时间 (HH:MM 格式)"
+        },
+        "whentooff.endTime": {
+          "type": "string",
+          "default": "18:00",
+          "description": "下班时间 (HH:MM 格式)"
+        },
+        "whentooff.workingDays": {
+          "type": "array",
+          "default": [
+            "周一",
+            "周二",
+            "周三",
+            "周四",
+            "周五"
+          ],
+          "description": "工作日选择（请选择工作日，选项为周一～周日）",
+          "items": {
+            "enum": [
+              "周一",
+              "周二",
+              "周三",
+              "周四",
+              "周五",
+              "周六",
+              "周日"
+            ]
+          }
+        },
+        "whentooff.currency": {
+          "type": "string",
+          "default": "￥",
+          "description": "币种"
+        },
+        "whentooff.notStartedText": {
+          "type": "string",
+          "default": "牛马准备",
+          "description": "上班前的提示文本"
+        },
+        "whentooff.finishedText": {
+          "type": "string",
+          "default": "今日目标已完成 赶紧下班吧！",
+          "description": "下班后的提示文本"
+        },
+        "whentooff.statusTemplate": {
+          "type": "string",
+          "default": "${progressBar}  ${earned}${currency} ${percentage}%",
+          "description": "状态栏显示模板。可用变量：${progressBar}、${earned}、${currency}、${percentage}"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.99.0",
+    "typescript": "^5.8.2"
+  }
+}
